@@ -145,6 +145,7 @@ function ConnectionWaysItem({
           handleShowConnectionWays={handleShowConnectionWays}
           socialItem={item}
           handleReloadList={handleReloadList}
+          showEditConnectionWays={showEditConnectionWays}
         />
       </Collapse>
       <Modal

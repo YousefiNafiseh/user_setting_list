@@ -41,6 +41,7 @@ type AddSocialProps = {
   handleReloadList: () => void;
   socialItem?: SocialItemType;
   items?: ListData[],
+  showEditConnectionWays?:boolean;
 }
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -59,6 +60,7 @@ function AddConnectionWays({
     type: "Instagram",
     link: "http://yahoo.com",
   }],
+  showEditConnectionWays
 }: AddSocialProps) {
   /* @ts-ignore: Unreachable code error*/
   let [connectionWaysType, setConnectionWaysType] = useState<optionType>(null);
@@ -89,7 +91,7 @@ function AddConnectionWays({
       });
     }
 
-  }, []);
+  }, [showEditConnectionWays]);
 
   const { handleSubmit, control, formState, reset } = useForm<FormModel>(
     {
@@ -118,6 +120,7 @@ function AddConnectionWays({
         })
           .then((response) => {
             handleShowConnectionWays(false);
+            handleReloadList();
             return response.json()
           })
       } else {
@@ -134,15 +137,14 @@ function AddConnectionWays({
         })
           .then((response) => {
             handleShowConnectionWays(false);
+            handleReloadList();
             return response.json();
           });
       }
-
     } else {
       setOpenSnackbar(true);
-      handleShowConnectionWays(false);
     }
-    handleReloadList();
+   
   };
 
   const handleChangeConnectionWaysType = (value: optionType) => {
